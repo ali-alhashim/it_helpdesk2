@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_solution_input_wizard" model="ir.ui.view">
+        <field name="name">solution.input.wizard.form</field>
+        <field name="model">solution.input.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Provide Solution">
+                <group>
+                    <field name="solution" placeholder="Enter the solution here..."/>
+                </group>
+                <footer>
+                    <button string="Confirm" type="object" name="action_confirm_solution" class="btn-primary"/>
+                    <button string="Cancel" type="object" name="action_cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

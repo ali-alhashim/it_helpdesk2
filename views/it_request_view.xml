@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--Record Rules-->
+<record id="it_request_employee_rule" model="ir.rule">
+    <field name="name">Employee: Own IT Requests</field>
+    <field name="model_id" ref="model_it_request"/>
+    <field name="domain_force">[('employee_id', '=', user.employee_id.id)]</field>
+    <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+</record>
+
+<record id="it_request_it_support_rule" model="ir.rule">
+    <field name="name">IT Support: All IT Requests</field>
+    <field name="model_id" ref="model_it_request"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('group_it_support'))]"/>
+</record>
+
+<record id="it_request_department_manager_rule" model="ir.rule">
+    <field name="name">Department Manager: Department IT Requests</field>
+    <field name="model_id" ref="model_it_request"/>
+    <field name="domain_force">[('employee_id.department_id.manager_id.user_id', '=', user.id)]</field>
+    <field name="groups" eval="[(4, ref('group_department_manager'))]"/>
+</record>
+
+
+<!--Form-->
+<record id="view_it_request_form" model="ir.ui.view">
+    <field name="name">it.request.form</field>
+    <field name="model">it.request</field>
+    <field name="arch" type="xml">
+        <form string="IT Request">
+             <header>
+                   <button name="action_submit" type="object" string="Submit" 
+                    invisible="not state == 'draft'"/>
+                            
+
+                    <button name="action_department_manager_approve" type="object" string="Approve by Department Manager" 
+                    invisible="not state ==  'department_manager_approval'" readonly="uid != department_manager_id"/> 
+                            
+
+                    <button name="action_it_manager_approve" type="object" string="Approve by IT Manager" 
+                    invisible="not state =='it_manager_approval'" readonly='uid != it_manager_id' group="group_it_manager"/> 
+                            
+
+                    <button name="action_reject" type="object" string="Reject" 
+                    invisible="state in  ['draft', 'approved', 'rejected'] "/>
+                            
+
+                    <field name="state" widget="statusbar" options="{'clickable': False}"/>
+            </header>
+            <sheet>
+
+                <!-- Your form fields here -->
+                <group>
+                <field name="employee_id" readonly='True'/>
+                <field name="department_manager_id" readonly='True'/>
+                <field name="it_manager_id" readonly='True'/>
+                <field name="request_type"/>
+                <field name="justification"/>
+                </group>
+            </sheet>
+              <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+                
+        </form>
+    </field>
+</record>
+
+<!--Tree-->
+  <record id="view_it_request_tree" model="ir.ui.view">
+        <field name="name">it.request.tree</field>
+        <field name="model">it.request</field>
+        <field name="arch" type="xml">
+          
+            <tree string="IT Request">
+                  <field name="employee_id"/>
+                  <field name="department_manager_id"/>
+                  <field name="it_manager_id"/>
+                  <field name="request_type"/>
+                  <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+  <!-- Action Definition -->
+    <record id="action_it_request" model="ir.actions.act_window">
+        <field name="name">IT request</field>
+        <field name="res_model">it.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

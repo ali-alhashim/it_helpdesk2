@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_it_helpdesk_root" 
+              name="IT Managment System 2"
+              web_icon = "hospital_app,static/description/icon.png"
+              />
+    
+    <menuitem id="menu_it_helpdesk_devices_root" 
+              name="Devices"
+              parent   = "menu_it_helpdesk_root"
+              />
+
+    <menuitem id="menu_it_helpdesk_Services_root" 
+            name="IT Services"
+            parent   = "menu_it_helpdesk_root"
+            />
+
+
+     <menuitem id="menu_it_helpdesk_devices" 
+              name="Devices"
+              action   = "action_it_devices"
+              parent   = "menu_it_helpdesk_devices_root"
+              />
+
+    
+     <menuitem id="menu_it_helpdesk_asset" 
+              name="Assets Register"
+              action   = "action_it_asset"
+              parent   = "menu_it_helpdesk_devices_root"
+              />
+
+      <menuitem id="menu_it_helpdesk_ticket" 
+              name="Ticket"
+              action   = "action_it_ticket"
+              parent   = "menu_it_helpdesk_Services_root"
+              />
+
+         <menuitem id="menu_it_helpdesk_request" 
+              name="IT Request"
+              action   = "action_it_request"
+              parent   = "menu_it_helpdesk_Services_root"
+              />
+
+
+        
+              
+
+
+</odoo>

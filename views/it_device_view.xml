@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--Search-->
+<record id="it_device_search" model="ir.ui.view">
+    <field name="name">it.device.search</field>
+    <field name="model">it.device</field>
+    <field name="arch" type="xml">
+        <search string="Devices">
+            <field name="serial_number"/>
+            <field name="model"/>
+            <field name="type"/>
+            <field name="acquisition_date"/>
+            <!-- Search based on the current user -->
+            <field name="user_ids"/>
+             
+        </search>
+    </field>
+</record>
+
+
+
+
+
+
+
+
+    <record id="it_device_view_form" model="ir.ui.view">
+        <field name="name">it.device.form</field>
+        <field name="model">it.device</field>
+        <field name="arch" type="xml">
+            <form string="IT Device">
+                 <header>
+                    <field name="state" widget="statusbar" options="{'clickable':'1'}"/>
+                </header>
+                <group>
+                    <field name="serial_number"/>
+                    <field name="manufacture"/>
+                    <field name="type"/>
+                    <field name="model"/>
+                    <field name="description"/>
+                    <field name="purchase_price"/>
+                    <field name="invoice"/>
+                    <field name="purchase_order"/>
+                    <field name="acquisition_date"/>
+                    <field name="user_ids"/>
+                </group>
+
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+                
+            </form>
+        </field>
+    </record>
+
+     <record id="it_device_view_tree" model="ir.ui.view">
+        <field name="name">it.device.tree</field>
+        <field name="model">it.device</field>
+        <field name="arch" type="xml">
+          
+            <tree string="IT Device">
+                    <field name="serial_number"/>
+                    <field name="manufacture"/>
+                    <field name="type"/>
+                    <field name="model"/>
+                    <field name="description" optional="show"/>
+                    <field name="acquisition_date"/>
+                    <field name="state" />
+                    <field name="create_date" string="Created Date" optional="show"/>
+                    <field name="user_ids" optional="show"/>
+                    <field name="current_user_id" />
+                    <button name="update_current_user" string="U" type="object" class="btn-primary"/>
+            </tree>
+        </field>
+    </record>
+
+
+      <!-- Action Definition -->
+    <record id="action_it_devices" model="ir.actions.act_window">
+        <field name="name">IT Devices</field>
+        <field name="res_model">it.device</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('it_device_view_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('it_device_view_form')}),
+                          
+                          ]"/>
+    </record>
+
+</odoo>

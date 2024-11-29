@@ -1,0 +1,19 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_it_ticket_user,it.ticket user,model_it_ticket,base.group_user,1,1,1,0
+access_it_ticket_support,it.ticket user,model_it_ticket,group_it_support,1,1,1,0
+
+access_it_device_user,it.device user,model_it_device,group_it_support,1,1,1,1
+access_it_device_user_history,it.device.user.history user,model_it_device_user_history,group_it_support,1,1,1,1
+access_it_request_user,it.request.user,model_it_request,base.group_user,1,1,1,0
+access_it_request_it_manager,it.request.user,model_it_request,group_it_manager,1,1,1,1
+access_it_support_assign_wizard,it.support.assign.wizard,model_it_support_assign_wizard,group_it_support,1,1,1,1
+access_it_cancel_confirm_wizard,cancel.confirm.wizard,model_cancel_confirm_wizard,group_it_support,1,1,1,1
+access_it_solution_input_wizard,solution.input.wizard,model_solution_input_wizard,group_it_support,1,1,1,1
+access_hr_employee_manager,access.hr.employee.manager,model_hr_employee,group_hr_manager,1,1,1,1
+access_hr_employee_it_manager,access.hr.employee.it.manager,model_hr_employee,group_it_manager,1,1,1,1
+access_hr_employee_it_support,access.hr.employee.it.support,model_hr_employee,group_it_support,1,0,0,0
+access_it_device_user_history,it.device.user.history user,model_it_device_user_history,base.group_user,1,0,0,0
+access_it_device_user,it.device user,model_it_device,base.group_user,1,0,0,0
+
+
+

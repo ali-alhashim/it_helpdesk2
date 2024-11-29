@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_it_asset_document">
+
+        <t t-call="web.html_container"> 
+        <html>
+        <head>
+            <meta charset="UTF-8"/>
+           <style>
+                        @page { size: A4 }
+                        @font-face {
+                            font-family: 'Tajawal-Regular';
+                            src: url('/it_helpdesk2/static/src/fonts/Tajawal-Regular.ttf');
+                            font-weight: normal;
+                            font-style: normal;
+
+                        }
+                        body {
+                            font-family: 'Tajawal-Regular', sans-serif;
+
+                        }
+                         .logo
+                            {
+                                opacity:0.5;
+                                max-width: 200px;
+                                
+                                
+                                
+                            
+                            }
+                        @media print 
+                        {
+                            .noprint {
+                            visibility: hidden;
+                            }
+                        }
+                        table{
+                            width: 100%;
+                            border-spacing: 0;
+
+                        }
+                        table td{
+                            border: solid #2e2e2e 1px;
+                            padding: 5px;
+                        }
+
+                        .rtl-text {
+                                    direction: rtl;
+                                    unicode-bidi: embed;
+                                    text-align: right;
+                                  }
+
+
+                </style>
+        </head>
+        <body>
+            <t t-foreach="docs" t-as="doc">
+                <div class="page"><!--start page-->
+              
+             
+
+                    
+
+                   
+                    <img t-attf-src="{{ 'http://{}/it_helpdesk2/static/src/img/logo.png'.format(request.httprequest.host) }}" class="logo" alt="x"/>
+
+
+                    
+
+
+                    <h2>IT Asset Register # <t t-esc="doc.id"/></h2>
+
+                  
+
+
+                    <table>
+                        <tr class="text-center">
+                        <td colspan="2" style="background:#DCDCDC !important">User Information</td>
+                        </tr>
+
+                         <tr>
+                         <td style="text-align:left !important">Name :</td> 
+                         
+                         <td style="text-align:left !important">
+                            <t t-esc="doc.user_id.name" />
+                            <br />
+                            <span class="rtl-text">
+                                <t t-esc="doc.user_id.arabic_name" />
+                            </span>
+                        </td>
+
+                        </tr>
+
+                        <tr>
+                        <td style="text-align:left !important">Badge Number :</td> <td style="text-align:left !important"><t t-esc="doc.user_id.barcode"/></td>
+                        </tr>
+
+                       <tr>
+                       <td style="text-align:left !important">Email :</td> <td style="text-align:left !important"><t t-esc="doc.user_id.work_email"/></td>
+                       </tr>
+                        <tr>
+                        <td style="text-align:left !important">Mobile :</td> <td style="text-align:left !important"><t t-esc="doc.user_id.work_phone"/></td>
+                        </tr>
+                        <tr>
+                        <td style="text-align:left !important">Department :</td> <td style="text-align:left !important"><t t-esc="doc.user_id.department_id.name"/></td>
+                        </tr>
+
+                        <tr class="text-center">
+                        <td colspan="2" style="background:#DCDCDC !important">IT Asset Information</td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:left !important">Asset ID :</td> <td style="text-align:left !important"><t t-esc="doc.reference"/></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left !important">Serial Number :</td> <td style="text-align:left !important"><t t-esc="doc.device_id.serial_number"/></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left !important">Category :</td> <td style="text-align:left !important"><t t-esc="doc.device_id.type"/></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left !important">Model :</td> <td style="text-align:left !important"><t t-esc="doc.device_id.model"/></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left !important">Manufacture  :</td> <td style="text-align:left !important"><t t-esc="doc.device_id.manufacture"/></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left !important">Description   :</td> <td style="text-align:left !important"><t t-esc="doc.device_id.description"/></td>
+                        </tr>
+                
+                       
+                    </table>
+                    <br />
+                    <table>
+                        <tr class="text-center">
+                            <td style="background:#DCDCDC !important">IT</td>
+                            <td style="background:#DCDCDC !important">USER</td>
+                        </tr>
+                        <tr>
+                            <td>
+                             <br />
+                             <br />
+                            </td>
+                            <td>
+                                <br />
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+
+                 <br/>
+                 <br/>
+                    <hr/>
+                    <b>Disclaimer</b>
+                    <br>
+                    This asset is the property of the company and is not to be used for personal purposes. 
+                    </br>
+                    Any illegal use is the responsibility of the receiver.
+                    <br/>
+                    You will be held accountable for any intentional damage or loss caused by you. 
+                </div> <!--end page-->
+            </t>
+        </body>
+        </html>
+        </t>
+    </template>
+</odoo>

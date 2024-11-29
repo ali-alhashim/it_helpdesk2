@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="report_it_asset_action" model="ir.actions.report">
+        <field name="name">Asset Report</field>
+        <field name="model">it.device.user.history</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">it_helpdesk2.report_it_asset_document</field>
+        <field name="print_report_name">'Asset Report - %s' % (object.reference)</field>
+    </record>
+</odoo>
+

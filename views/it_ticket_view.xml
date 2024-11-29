@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+<record id="it_ticket_employee_rule" model="ir.rule">
+    <field name="name">Employee: Own ticket</field>
+    <field name="model_id" ref="model_it_ticket"/>
+    <field name="domain_force">[('user_id', '=', user.employee_id.id)]</field>
+    <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+</record>
+
+<record id="it_ticket_support_rule" model="ir.rule">
+    <field name="name">IT Support: All ticket</field>
+    <field name="model_id" ref="model_it_ticket"/>
+    <field name="domain_force">[(1, '=', 1)]</field>
+    <field name="groups" eval="[(4, ref('group_it_support'))]"/>
+</record>
+
+
+
+
+
+    <record id="it_ticket_view_form" model="ir.ui.view">
+        <field name="name">it.ticket.form</field>
+        <field name="model">it.ticket</field>
+        <field name="arch" type="xml">
+            <form string="IT Ticket">
+               <header>
+                <button name="action_submit" type="object" string="Submit" invisible="not status == 'draft'"/> 
+
+                <button name="action_assign_it_support" type="object" string="Assign to IT Support" class="oe_highlight" 
+                invisible="not status == 'submitted'" groups="it_helpdesk2.group_it_support,it_helpdesk2.group_it_manager"/>
+
+                <button name="action_cancel" type="object" string="Cancel" class="oe_highlight" 
+                invisible="not status == 'in_progress'" groups="it_helpdesk2.group_it_support,it_helpdesk2.group_it_manager"/>
+
+                 <button name="action_done" type="object" string="Done" class="oe_highlight" 
+                invisible="not status == 'in_progress'" groups="it_helpdesk2.group_it_support,it_helpdesk2.group_it_manager"/>
+                            
+                            
+                    
+                <field name="status" widget="statusbar" options="{'clickable': False}"/>
+                </header>
+               <sheet>
+                <group>
+                    <field name="subject"/>
+                    <field name="description"/>
+                    <field name="priority"/>
+                  
+                    <field name="device_id" domain="[('id', 'in', device_ids)]"/>
+                        <!-- Hidden field to hold the device IDs -->
+                        <field name="device_ids" invisible="1"/>
+                    <field name="user_id" readonly="True"/>
+                    <field name="handled_by" readonly="True"/>
+                    <field name="solution" readonly="True"/>
+                   
+                </group>
+
+                </sheet>
+                
+                 <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+                
+            </form>
+        </field>
+    </record>
+
+
+     <record id="it_ticket_view_tree" model="ir.ui.view">
+        <field name="name">it.ticket.tree</field>
+        <field name="model">it.ticket</field>
+        <field name="arch" type="xml">
+            <tree string="IT Ticket">
+              
+                    <field name="subject"/>
+                    <field name="description"/>
+                    <field name="priority"/>
+                    <field name="status"/>
+                    <field name="device_id"/>
+                    <field name="user_id"/>
+                    <field name="handled_by"/>
+                
+            </tree>
+        </field>
+    </record>
+
+    
+      <!-- Action Definition -->
+    <record id="action_it_ticket" model="ir.actions.act_window">
+        <field name="name">IT Ticket</field>
+        <field name="res_model">it.ticket</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
