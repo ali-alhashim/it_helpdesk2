@@ -17,7 +17,9 @@ class ItDeviceUserHistory(models.Model):
     reference       = fields.Char(string="Reference", default='New', copy=False)
 
     device_type     = fields.Selection(related='device_id.type', string='Device Type', store=True)
+
     arabic_name     = fields.Char(related='user_id.arabic_name', string='Arabic Name')
+    badge_number     = fields.Char(related='user_id.barcode', string='Badge Number')
 
     
     @api.model_create_multi

@@ -12,6 +12,7 @@
                  <field name="device_type"/>
                 <field name="user_id"/>
                 <field name="arabic_name"/>
+                <field name="badge_number"/>
                 <field name="start_date"/>
                 <field name="end_date"/> 
         </search>
@@ -58,6 +59,7 @@
                 <field name="reference"/>
                 <field name="device_id"/>
                  <field name="device_type"/>
+                  <field name="badge_number"/>
                 <field name="user_id"/>
                 <field name="arabic_name"/>
                 <field name="start_date"/>
